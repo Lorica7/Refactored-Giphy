@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        ANIMAL GIPHY PAGE
+    </title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Chewy|Fontdiner+Swanky|Lemonada|Ultra" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1 id="amazing">Amazing Animals</h1>
+            <div id="button-holder">
+
+            </div>
+        </header>
+
+        <div class="row">
+            <div class="col-9" id="animal-images">
+
+            </div>
+            <div class="col-3">
+                <div id="wrapper">
+                    <h3>What do you want to search for?</h3>
+                    <form>
+                        <label class="form-check-label" for="exampleCheck1">Find some animals!</label>
+                        <br>
+                        <input type="text" class="form-control" onfocus="this.value=''" id="user-input" />
+                        <button type="button" class="btn btn-medium" id="search">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="logic.js"></script>
+</body>
+
+
+</html>
