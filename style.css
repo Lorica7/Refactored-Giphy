@@ -1,6 +1,26 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Chewy", cursive;
-  background: url(leopardprint.jpg) no-repeat center center fixed;
+  background: url(leopardprint.jpg);
+  margin: 0;
+  padding: 0;
+}
+
+/* .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .btn-large {
@@ -26,15 +46,15 @@ h1 {
 }
 
 header {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   margin: 20px;
-  height: 270px;
+  min-height: 270px;
   overflow: auto;
 }
 
 #wrapper {
   float: right;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   color: #c09562;
   margin-top: 20px;
   padding: 20px;
@@ -50,14 +70,27 @@ h3 {
   padding: 6px 6px;
 }
 
-.container {
-  clear: none;
-}
-
 img {
   margin: 20px;
 }
 
 #animal-images {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
 }
+
+#button-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+/* @media (max-width: 768px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+} */
