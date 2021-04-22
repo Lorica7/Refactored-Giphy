@@ -2,7 +2,7 @@
 
 Check out the finished project:
 
-
+https://lorica7.github.io/Refactored-Giphy/
 
 ### Overview
 
