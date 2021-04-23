@@ -10,11 +10,13 @@ body {
   padding: 0;
 }
 
-/* .container {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+  flex-direction: column;
+}
+
 header {
   width: 100%;
   display: flex;
@@ -53,11 +55,22 @@ header {
 }
 
 #wrapper {
-  float: right;
   background-color: rgba(0, 0, 0, 0.9);
   color: #c09562;
   margin-top: 20px;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-check-label {
+  margin: 10px;
+  padding: 10px;
+}
+.form-control {
+  margin: 10px;
+  padding: 10px;
 }
 
 h3 {
@@ -74,8 +87,17 @@ img {
   margin: 20px;
 }
 
+.giphyImages {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #animal-images {
   background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 #button-holder {
