@@ -8,6 +8,7 @@ let resultData = {};
 const renderBtns = () => {
     animalArray.forEach(function(item) {
         const buttons = $("<button>");
+      
         buttons.addClass("btn-large");
         buttons.attr("data-animal", item);
         buttons.text(item);
