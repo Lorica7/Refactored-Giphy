@@ -4,6 +4,8 @@ Check out the finished project:
 
 https://lorica7.github.io/Refactored-Giphy/
 
+This app is a refactored and restyled version of something I originally coded in bootcamp. The assignment details are below. The original version used Bootstrap for style and to provide responsive design, and made use of JQuery as well. With a better understanding of JS and CSS, I was able to eliminate those dependencies. This updated version eliminates those dependencies. I also added some of the "bonus" features that are listed below, and were not included in the original assigment. 
+
 ### Overview
 
 In this assignment, you'll use the GIPHY API to make a dynamic web page that populates with gifs of your choice. To finish this task, you must call the GIPHY API and use JavaScript and jQuery to change the HTML of your site.
@@ -96,12 +98,5 @@ Add a `README.md` to your repository describing the project. Here are some resou
 
 After completing the homework please add the piece to your portfolio. Make sure to add a link to your updated portfolio in the comments section of your homework so the TAs can easily ensure you completed this step when they are grading the assignment. To receive an 'A' on any assignment, you must link to it from your portfolio.
 
-- - -
 
-### One More Thing
 
-If you have any questions about this project or the material we have covered, please post them in the community channels in slack so that your fellow developers can help you! If you're still having trouble, you can come to office hours for assistance from your instructor and TAs.
-
-**Good Luck!**
-
-# GIPY_UPDATE
