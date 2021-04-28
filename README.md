@@ -4,7 +4,7 @@ Check out the finished project:
 
 https://lorica7.github.io/Refactored-Giphy/
 
-This app is a refactored and restyled version of something I originally coded in bootcamp. The assignment details are below. The original version used Bootstrap for style and to provide responsive design, and made use of JQuery as well. With a better understanding of JS and CSS, I was able to eliminate those dependencies. This updated version eliminates those dependencies. I also added some of the "bonus" features that are listed below, and were not included in the original assigment. 
+This app is a refactored and restyled version of something I originally coded in bootcamp. The assignment details are below. The original version used Bootstrap for style and to provide responsive design, and made use of JQuery as well. With a better understanding of JS and CSS, I was able to eliminate those dependencies. I also added some of the "bonus" features that are listed below, and were not included in the original assigment. 
 
 ### Overview
 
