@@ -25,7 +25,8 @@ header {
   flex-direction: column;
 }
 
-.btn-large {
+.btn-large,
+.btn-more {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 20px;

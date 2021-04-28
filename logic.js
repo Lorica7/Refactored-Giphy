@@ -3,12 +3,11 @@ const giphySearchButton = document.getElementById("search");
 const animalArray = ["zebra", "dogs", "pigs", "sloth", "guinea-pig", "platypus", "kangaroo", "elephant", "chipmunk"];
 const animalContainer = document.getElementById("animal-images");
 let resultData = {};
-
+let resultIDs = [];
 
 const renderBtns = () => {
     animalArray.forEach(function(item) {
         const buttons = $("<button>");
-      
         buttons.addClass("btn-large");
         buttons.attr("data-animal", item);
         buttons.text(item);
@@ -81,6 +80,18 @@ giphySearchButton.addEventListener("click", () => {
 
 });
 
+const addMore = (searchParam) => {
+    let search2 = "https://api.giphy.com/v1/gifs/search?q=" + searchParam + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=15";
+    $(".btn-more").click((event => {
+        $.ajax({
+            url: search2,
+            method: "GET"
+        }).then((result) => {
+            console.log(result.data);
+        })
+    }))
+};
+
 const addSearchEvent = () => {
     $(".btn-large").click((event) => {
         $("#animal-images").empty();
@@ -94,8 +105,18 @@ const addSearchEvent = () => {
         }).then((result) => {
             console.log(result.data);
             const resData2 = result.data;
-            displayArr(resData2, buttonReq)
+            displayArr(resData2, buttonReq);
 
+            resData2.forEach((item) => {
+                resultIDs.push(item.id)
+            })
+            console.log(resultIDs);
+
+            const findMore = $("<button>");
+            findMore.addClass("btn-more");
+            findMore.text("Add more");
+            $('#animal-images').append(findMore);
+            $(".btn-more").click(addMore(buttonReq));
         });
     })
 };
