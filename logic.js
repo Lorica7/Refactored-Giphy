@@ -80,6 +80,14 @@ giphySearchButton.addEventListener("click", () => {
 
 });
 
+// const idCheck = (item) => {
+
+    
+    
+//    return item
+    
+// }
+
 const addMore = (searchParam) => {
     let search2 = "https://api.giphy.com/v1/gifs/search?q=" + searchParam + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=15";
     $(".btn-more").click((event => {
@@ -87,7 +95,14 @@ const addMore = (searchParam) => {
             url: search2,
             method: "GET"
         }).then((result) => {
-            console.log(result.data);
+            let arr2 = result.data
+            let newItems = [];
+            for (let i in arr2) {
+                if (resultIDs.indexOf(arr2[i].id) === -1)
+                  newItems.push(arr2[i])  
+            }
+            console.log(newItems);
+            return newItems;
         })
     }))
 };
