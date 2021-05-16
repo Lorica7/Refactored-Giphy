@@ -31,27 +31,35 @@ const addButton = (name) => {
 
 const toggleState = function(group) {
     $('body').on('click', '.giphyImages', function(event) {
-        const i = parseInt($(this).attr('id'));
+        const i = $(this).attr('id');
         const pictureState = $(this).attr('state');
-        const movingLink = group[i].movingImage;
-        const stillLink = group[i].stillImage;
-        if (pictureState == 'still') {
-            event.target.setAttribute('src', movingLink);
-            event.target.setAttribute('state', 'moving');
-        } else if (pictureState == 'moving') {
-            event.target.setAttribute('src', stillLink);
-            event.target.setAttribute('state', 'still');
+
+        //check through all objects in group and save the one where i is equal to id. then access the corresponding keys of movingImage and stillImage
+        for (let item of group) {
+            if (item.id === i) {
+                console.log(item)
+                const movingLink = item.movingImage;
+                const stillLink = item.stillImage;
+                if (pictureState == 'still') {
+                    event.target.setAttribute('src', movingLink);
+                    event.target.setAttribute('state', 'moving');
+                } else if (pictureState == 'moving') {
+                    event.target.setAttribute('src', stillLink);
+                    event.target.setAttribute('state', 'still');
+                }
+            }
         }
     })
 };
 
 const displayArr = (photoArr, searchN) => {
     let imagesArr = [];
-    photoArr.forEach((item, index) => {
+    photoArr.forEach((item) => {
         const movingImage = item.images.fixed_height.url;
         const stillImage = item.images.fixed_height_still.url;
-        const imageObj = { movingImage: movingImage, stillImage: stillImage };
-        const img = `<img class="giphyImages" data-searchterm="${searchN}" id="${index}" src="${stillImage}" state="still"></img>`;
+        //Giving each item a unique id
+        const imageObj = { movingImage: movingImage, stillImage: stillImage, id: item.id };
+        const img = `<img class="giphyImages" data-searchterm="${searchN}" id="${item.id}" src="${stillImage}" state="still"></img>`;
         $("#animal-images").append(img)
         imagesArr.push(imageObj);
         return imagesArr;
@@ -80,13 +88,7 @@ giphySearchButton.addEventListener("click", () => {
 
 });
 
-// const idCheck = (item) => {
 
-    
-    
-//    return item
-    
-// }
 
 const addMore = (searchParam) => {
     let search2 = "https://api.giphy.com/v1/gifs/search?q=" + searchParam + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=15";
@@ -102,7 +104,9 @@ const addMore = (searchParam) => {
                   newItems.push(arr2[i])  
             }
             console.log(newItems);
-            return newItems;
+            let disBtn = document.querySelector(".btn-more")
+            disBtn.disabled = true;
+            displayArr(newItems, searchParam);
         })
     }))
 };
@@ -111,7 +115,6 @@ const addSearchEvent = () => {
     $(".btn-large").click((event) => {
         $("#animal-images").empty();
         let buttonReq = event.target.textContent;
-        imagesArr2 = [];
         let searchURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonReq + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=5";
         //making AJAX call
         $.ajax({
@@ -122,10 +125,13 @@ const addSearchEvent = () => {
             const resData2 = result.data;
             displayArr(resData2, buttonReq);
 
+            // Ids are stored to prevent duplicates when more are added
             resData2.forEach((item) => {
                 resultIDs.push(item.id)
             })
             console.log(resultIDs);
+
+            // Create "Add More" Button
 
             const findMore = $("<button>");
             findMore.addClass("btn-more");
