@@ -59,11 +59,18 @@ const displayArr = (photoArr, searchN) => {
 
     // eliminate duplicates by saving to new array
     let unique = [];
-    for (let i in photoArr) {
-        if (resultIDs.indexOf(photoArr[i].id) === -1)
-          unique.push(photoArr[i])  
+    let photoDiv = document.querySelector(".giphyImages")
+    if (photoDiv !== null) {
+        for (let i in photoArr) {
+            if (resultIDs.indexOf(photoArr[i].id) === -1) {
+                unique.push(photoArr[i])
+            }
+        }
+    } else {
+        for (let i in photoArr) {
+            unique.push(photoArr[i])
+        }
     }
-
    unique.forEach((item) => {
         const movingImage = item.images.fixed_height.url;
         const stillImage = item.images.fixed_height_still.url;
@@ -81,7 +88,7 @@ const displayArr = (photoArr, searchN) => {
 // event listener for search 
 giphySearchButton.addEventListener("click", () => {
     $("#animal-images").empty();
-  
+    $("#find-more").empty();
     const searchReq = document.getElementById("user-input").value;
     const queryURL = `https://api.giphy.com/v1/gifs/search?q= ${searchReq} &api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=10`;
     //making AJAX call
@@ -94,16 +101,18 @@ giphySearchButton.addEventListener("click", () => {
         const resData = result.data
         displayArr(resData, searchReq)
         addButton(searchReq);
+        addFindMore(searchReq);
         input.value = ""
     });
 
 });
 
 function addFindMore(buttonReq) {
+    $("#find-more").empty();
     const findMore = $("<button>");
     findMore.addClass("btn-more");
     findMore.text("Add more");
-    $('.find-more').append(findMore);
+    $('#find-more').append(findMore);
     $(".btn-more").click(addMore(buttonReq));
 }
 
@@ -133,7 +142,7 @@ const addSearchEvent = () => {
     $(".btn-large").click((event) => {
 
         $("#animal-images").empty();
-        $(".find-more").empty();
+        $("#find-more").empty();
         let buttonReq = event.target.textContent;
         let searchURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonReq + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=5";
         //making AJAX call
