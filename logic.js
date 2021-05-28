@@ -2,7 +2,8 @@
 const giphySearchButton = document.getElementById("search");
 const animalArray = ["zebra", "dogs", "pigs", "sloth", "guinea-pig", "platypus", "kangaroo", "elephant", "chipmunk"];
 const animalContainer = document.getElementById("animal-images");
-let resultData = {};
+
+let input = document.querySelector("#user-input");
 let resultIDs = [];
 
 const renderBtns = () => {
@@ -33,7 +34,7 @@ const toggleState = function(group) {
     $('body').on('click', '.giphyImages', function(event) {
         const i = $(this).attr('id');
         const pictureState = $(this).attr('state');
-
+        console.log("clicking")
         //check through all objects in group and save the one where i is equal to id. then access the corresponding keys of movingImage and stillImage
         for (let item of group) {
             if (item.id === i) {
@@ -54,7 +55,16 @@ const toggleState = function(group) {
 
 const displayArr = (photoArr, searchN) => {
     let imagesArr = [];
-    photoArr.forEach((item) => {
+    console.log(photoArr)
+
+    // eliminate duplicates by saving to new array
+    let unique = [];
+    for (let i in photoArr) {
+        if (resultIDs.indexOf(photoArr[i].id) === -1)
+          unique.push(photoArr[i])  
+    }
+
+   unique.forEach((item) => {
         const movingImage = item.images.fixed_height.url;
         const stillImage = item.images.fixed_height_still.url;
         //Giving each item a unique id
@@ -71,6 +81,7 @@ const displayArr = (photoArr, searchN) => {
 // event listener for search 
 giphySearchButton.addEventListener("click", () => {
     $("#animal-images").empty();
+  
     const searchReq = document.getElementById("user-input").value;
     const queryURL = `https://api.giphy.com/v1/gifs/search?q= ${searchReq} &api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=10`;
     //making AJAX call
@@ -83,11 +94,18 @@ giphySearchButton.addEventListener("click", () => {
         const resData = result.data
         displayArr(resData, searchReq)
         addButton(searchReq);
-
+        input.value = ""
     });
 
 });
 
+function addFindMore(buttonReq) {
+    const findMore = $("<button>");
+    findMore.addClass("btn-more");
+    findMore.text("Add more");
+    $('.find-more').append(findMore);
+    $(".btn-more").click(addMore(buttonReq));
+}
 
 
 const addMore = (searchParam) => {
@@ -97,7 +115,7 @@ const addMore = (searchParam) => {
             url: search2,
             method: "GET"
         }).then((result) => {
-            let arr2 = result.data
+            const arr2 = result.data
             let newItems = [];
             for (let i in arr2) {
                 if (resultIDs.indexOf(arr2[i].id) === -1)
@@ -113,7 +131,9 @@ const addMore = (searchParam) => {
 
 const addSearchEvent = () => {
     $(".btn-large").click((event) => {
+
         $("#animal-images").empty();
+        $(".find-more").empty();
         let buttonReq = event.target.textContent;
         let searchURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonReq + "&api_key=P1UxBlMCbh1oybrMn1pVZvc7jexNd7sE&limit=5";
         //making AJAX call
@@ -129,20 +149,21 @@ const addSearchEvent = () => {
             resData2.forEach((item) => {
                 resultIDs.push(item.id)
             })
-            console.log(resultIDs);
-
-            // Create "Add More" Button
-
-            const findMore = $("<button>");
-            findMore.addClass("btn-more");
-            findMore.text("Add more");
-            $('#animal-images').append(findMore);
-            $(".btn-more").click(addMore(buttonReq));
+           
+                addFindMore(buttonReq) 
         });
     })
 };
+
+
+
+function clearInput() {
+    input.value = "";
+}
 // create starting buttons
 renderBtns();
 
 //add event listener to animal buttons
 addSearchEvent();
+
+clearInput();
