@@ -31,7 +31,7 @@ const addButton = (name) => {
 }
 
 const toggleState = function(group) {
-    $('body').on('click', '.giphyImages', function (event) {
+    $('.giphyImages').click(function (event) {
         event.stopPropagation()
         event.preventDefault();
         const i = $(this).attr('id');
@@ -80,7 +80,7 @@ const displayArr = (photoArr, searchN) => {
         const stillImage = item.images.fixed_height_still.url;
         //Giving each item a unique id
         const imageObj = { movingImage: movingImage, stillImage: stillImage, id: item.id };
-        const img = `<img class="giphyImages" data-searchterm="${searchN}" id="${item.id}" src="${stillImage}" class="still"></img>`;
+        const img = `<img class="giphyImages" data-searchterm="${searchN}" id="${item.id}" src="${stillImage}" state="still"></img>`;
         $("#animal-images").append(img)
         imagesArr.push(imageObj);
         return imagesArr;
