@@ -31,7 +31,9 @@ const addButton = (name) => {
 }
 
 const toggleState = function(group) {
-    $('body').on('click', '.giphyImages', function(event) {
+    $('body').on('click', '.giphyImages', function (event) {
+        event.stopPropagation()
+        event.preventDefault();
         const i = $(this).attr('id');
         const pictureState = $(this).attr('state');
         console.log("clicking")
@@ -52,6 +54,8 @@ const toggleState = function(group) {
         }
     })
 };
+
+
 
 const displayArr = (photoArr, searchN) => {
     let imagesArr = [];
@@ -76,7 +80,7 @@ const displayArr = (photoArr, searchN) => {
         const stillImage = item.images.fixed_height_still.url;
         //Giving each item a unique id
         const imageObj = { movingImage: movingImage, stillImage: stillImage, id: item.id };
-        const img = `<img class="giphyImages" data-searchterm="${searchN}" id="${item.id}" src="${stillImage}" state="still"></img>`;
+        const img = `<img class="giphyImages" data-searchterm="${searchN}" id="${item.id}" src="${stillImage}" class="still"></img>`;
         $("#animal-images").append(img)
         imagesArr.push(imageObj);
         return imagesArr;
@@ -99,6 +103,10 @@ giphySearchButton.addEventListener("click", () => {
         console.log("success got data", result);
         console.log(result.data);
         const resData = result.data
+// track item Ids
+        resData.forEach((item) => {
+            resultIDs.push(item.id)
+        })
         displayArr(resData, searchReq)
         addButton(searchReq);
         addFindMore(searchReq);
@@ -125,14 +133,15 @@ const addMore = (searchParam) => {
             method: "GET"
         }).then((result) => {
             const arr2 = result.data
+
+            //add only new items
             let newItems = [];
             for (let i in arr2) {
                 if (resultIDs.indexOf(arr2[i].id) === -1)
                   newItems.push(arr2[i])  
             }
             console.log(newItems);
-            let disBtn = document.querySelector(".btn-more")
-            disBtn.disabled = true;
+            disable();
             displayArr(newItems, searchParam);
         })
     }))
@@ -164,6 +173,10 @@ const addSearchEvent = () => {
     })
 };
 
+function disable() {
+    let disBtn = document.querySelector(".btn-more")
+    disBtn.disabled = true;
+}
 
 
 function clearInput() {
